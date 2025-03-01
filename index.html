@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qxzxf | Портфолио</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Добавьте базовые стили напрямую в head для решения проблемы с загрузкой внешних стилей -->
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #121212;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent-color: #6c5ce7;
+            --accent-color-2: #00cec9;
+            --gradient-1: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+            --gradient-2: linear-gradient(45deg, #fc466b, #3f5efb);
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 16px;
+            --border-radius-full: 999px;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-primary: 'Inter', sans-serif;
+            --font-secondary: 'Playfair Display', serif;
+        }
+        
+        /* Базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(108, 92, 231, 0.1), transparent 60%),
+                        radial-gradient(circle at bottom left, rgba(0, 206, 201, 0.1), transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: color var(--transition-normal);
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        /* Улучшенные стили для шапки */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+        }
+        
+        header.scrolled {
+            padding: 0.7rem 0;
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(108, 92, 231, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo a {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #6c5ce7 0%, #00cec9 50%, #fc466b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            padding: 0.2rem 0;
+        }
+        
+        .logo a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .logo a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            height: 2.5rem;
+            line-height: 1.5rem;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(108, 92, 231, 0.1), transparent);
+            z-index: -1;
+            transition: width 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-color);
+            transform: none;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .theme-toggle {
+            position: relative;
+            z-index: 2;
+        }
+        
+        #theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--border-radius-full);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #theme-toggle-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: -1;
+        }
+        
+        #theme-toggle-btn:hover::before {
+            width: 150%;
+            height: 150%;
+        }
+        
+        #theme-toggle-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        body[data-theme="light"] {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        body[data-theme="light"] header {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        body[data-theme="light"] .fa-moon {
+            display: none;
+        }
+        
+        body[data-theme="light"] .fa-sun {
+            display: inline-block;
+        }
+        
+        .fa-sun {
+            display: none;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--text-primary);
+            transition: all var(--transition-normal);
+        }
+        
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        
+        /* Улучшенные стили для героя */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .particle-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text h1 {
+            font-family: var(--font-secondary);
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .glitch {
+            position: relative;
+            text-shadow: 0 0 5px rgba(108, 92, 231, 0.5);
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--accent-color);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-1 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--accent-color-2);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-2 5s infinite linear alternate-reverse;
+        }
+        
+        .typewriter {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            height: 2.5rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .typewriter .cursor {
+            display: inline-block;
+            width: auto;
+            height: auto;
+            background: transparent;
+            margin-left: 3px;
+            animation: blink 1s infinite;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+            max-width: 90%;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        
+        .hero-btn {
+            position: relative;
+            padding: 1.2rem 2.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: var(--border-radius-full);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .hero-btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.3);
+        }
+        
+        .hero-btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Эффект свечения */
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-1);
+            z-index: -2;
+            border-radius: var(--border-radius-full);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        /* Эффект блика */
+        .hero-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+        
+        /* Hover эффекты */
+        .hero-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            letter-spacing: 3px;
+        }
+        
+        .hero-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .hero-btn:hover::after {
+            left: 100%;
+        }
+        
+        .hero-btn-primary:hover {
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.4);
+        }
+        
+        .hero-btn-secondary:hover {
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.3);
+        }
+        
+        /* Активное состояние */
+        .hero-btn:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+        
+        .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blob-animation {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            z-index: -1;
+            animation: blob-rotate 20s infinite linear;
+            opacity: 0.7;
+        }
+        
+        .profile-image {
+            position: relative;
+            z-index: 2;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: all 0.5s ease;
+        }
+        
+        .profile-image:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+        
+        .profile-image img {
+            transition: all 0.5s ease;
+        }
+        
+        .profile-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .hero-3d-element {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .scroll-indicator:hover {
+            opacity: 1;
+        }
+        
+        .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--text-secondary);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+        }
+        
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background-color: var(--text-primary);
+            border-radius: 2px;
+            animation: scroll 1.5s infinite;
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(15px);
+                opacity: 0;
+            }
+        }
+        
+        .scroll-text {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Улучшенные стили для секций */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-family: var(--font-secondary);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-line {
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-1);
+            margin: 0 auto;
+            border-radius: var(--border-radius-full);
+        }
+        
+        /* Улучшенные стили для GitHub профиля */
+        .github-section {
+            padding: 8rem 0;
+            background: radial-gradient(circle at center, rgba(108, 92, 231, 0.05), transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .github-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTA4LCA5MiwgMjMxLCAwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSI2Ii8+PC9nPjwvc3ZnPg==');
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .github-profile {
+            background: rgba(18, 18, 18, 0.7);
+            border-radius: var(--border-radius-lg);
+            padding: 3.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 92, 231, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .github-profile::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(108, 92, 231, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .github-profile:hover {
+            transform: translateY(-10px);
+        }
+        
+        .github-profile:hover::before {
+            opacity: 1;
+        }
+        
+        .github-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .github-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+        }
+        
+        .github-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .github-info h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .github-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .github-section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .github-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: var(--border-radius-full);
+        }
+        
+        .social-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .social-badges a {
+            transition: transform 0.3s ease;
+        }
+        
+        .social-badges a:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .tech-badges img {
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badges img:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+        
+        .github-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .github-trophies, .dev-quote, .top-repos, .snake-animation {
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .github-trophies:hover, .dev-quote:hover, .top-repos:hover, .snake-animation:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .snake-animation {
+            background: rgba(10, 10, 10, 0.5);
+            padding: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .visit-counter {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        /* Улучшенная нижняя часть сайта (футер) */
+        footer {
+            background: linear-gradient(to top, var(--bg-secondary), transparent);
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--gradient-1);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+            padding-left: 2rem;
+        }
+        
+        .footer-links a:hover::before {
+            left: 0.5rem;
+            opacity: 1;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-social a:hover {
+            background: var(--gradient-1);
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom a {
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Улучшенные стили для кнопки отправки сообщения */
+        .contact-form button {
+            background: linear-gradient(45deg, #6c5ce7, #00cec9);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+        }
+        
+        .contact-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.4);
+        }
+        
+        /* Добавление красивых анимаций на сайт */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Применение анимаций к элементам */
+        .hero-content h1 {
+            animation: slideInLeft 1s ease forwards;
+        }
+        
+        .hero-content p {
+            animation: slideInLeft 1s ease 0.3s forwards;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        
+        .hero-image {
+            animation: slideInRight 1s ease forwards;
+        }
+        
+        .section-title {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .project-card, .skill-card, .contact-form {
+            animation: fadeIn 0.8s ease forwards;
+            animation-play-state: paused;
+        }
+        
+        .animated-gradient {
+            background: linear-gradient(270deg, var(--accent-color), var(--accent-color-2), #fc466b, #3f5efb);
+            background-size: 300% 300%;
+            animation: gradientFlow 15s ease infinite;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .pulse-on-hover:hover {
+            animation: pulse 2s ease infinite;
+        }
+        
+        /* Наблюдатель за появлением элементов для запуска анимаций */
+        .animate-on-scroll {
+            opacity: 0;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+        }
+    </style>
+    
+    <!-- Добавляем библиотеку для анимаций -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Добавляем библиотеку для параллакс-эффектов -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax.js/1.5.0/parallax.min.js" defer></script>
+    <!-- Добавляем библиотеку для 3D-эффектов -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    
+    <!-- Добавляем определения анимаций, которые могли отсутствовать -->
+    <style>
+        /* Определения ключевых кадров для анимаций */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Классы для анимаций */
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .animate-slide-left {
+            animation: slideInLeft 1s ease forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideInRight 1s ease forwards;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-pulse:hover {
+            animation: pulse 2s ease infinite;
+        }
+        
+        .animate-gradient {
+            background-size: 300% 300%;
+            animation: gradientFlow 15s ease infinite;
+        }
+    </style>
+    
+    <!-- В секцию head добавьте следующую строку -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+</head>
+<body>
+    <!-- Добавить в начало body, перед основным контентом -->
+    <div class="space-background">
+        <div class="stars"></div>
+        <div class="neon-grid"></div>
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div id="particles-js" class="particles"></div>
+    </div>
+
+    <!-- Добавляем в начало body -->
+    <div class="gradient-background"></div>
+    <div class="grid-overlay"></div>
+    <div class="floating-spheres">
+        <div class="sphere"></div>
+        <div class="sphere"></div>
+        <div class="sphere"></div>
+    </div>
+
+    <!-- Добавляем в начало body, сразу после открывающего тега -->
+    <!-- Фоновые элементы -->
+    <div class="particles-container" id="particles-container"></div>
+    <div class="bg-decoration bg-decoration-1"></div>
+    <div class="bg-decoration bg-decoration-2"></div>
+
+    <!-- Прелоадер -->
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Кастомный курсор -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="#">qxzxf</a>
+                </div>
+                <div class="nav-links">
+                    <a href="#home" class="nav-link">Главная</a>
+                    <a href="#about" class="nav-link">Обо мне</a>
+                    <a href="#skills" class="nav-link">Навыки</a>
+                    <a href="#projects" class="nav-link">Проекты</a>
+                    <a href="#github" class="nav-link">GitHub</a>
+                    <a href="#contact" class="nav-link">Контакты</a>
+                    
+                    <div class="theme-toggle">
+                        <button id="theme-toggle-btn">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <span class="hero-subtitle">Привет, я</span>
+                        <h1 class="hero-title glitch">Kirill Botov</h1>
+                        <div class="typewriter">
+                            <span class="typing-text"></span>
+                            <span class="cursor-blink"></span>
+                        </div>
+                        <p class="hero-description">
+                            Создаю современные, отзывчивые и интерактивные веб-приложения с использованием передовых технологий.
+                        </p>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">Проектов</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3+</span>
+                                <span class="stat-label">Года опыта</span>
+                            </div>
+                        </div>
+                        <div class="hero-buttons">
+                            <a href="#projects" class="hero-btn hero-btn-primary">
+                                <i class="fas fa-eye"></i>
+                                <span>Смотреть проекты</span>
+                            </a>
+                            <a href="#contact" class="hero-btn hero-btn-secondary">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Связаться</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <!-- Изображение героя -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">Обо мне</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="about-text">
+                            Я веб-разработчик с опытом создания современных и функциональных веб-приложений. Моя цель — разрабатывать интуитивно понятные и эстетически приятные цифровые решения, которые решают реальные проблемы.
+                        </p>
+                        <div class="about-info">
+                            <div class="info-column">
+                                <div class="info-item">
+                                    <span class="info-label">Местоположение</span>
+                                    <span class="info-value">Астана, Казахстан</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Телефон</span>
+                                    <span class="info-value">+7 (777) 123-45-67</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Email</span>
+                                    <span class="info-value">contact@qxzxf.com</span>
+                                </div>
+                            </div>
+                            <div class="info-column">
+                                <div class="info-item">
+                                    <span class="info-label">Опыт</span>
+                                    <span class="info-value">3+ лет в веб-разработке</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Образование</span>
+                                    <span class="info-value">Бакалавр компьютерных наук</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Языки</span>
+                                    <span class="info-value">Русский, Английский</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-buttons">
+                            <a href="#contact" class="about-btn">Связаться</a>
+                            <a href="#" class="about-btn secondary">Скачать резюме</a>
+                        </div>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="stat-counter" data-count="15">15+</div>
+                            <div class="stat-label">Завершенных проектов</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-smile"></i>
+                            </div>
+                            <div class="stat-counter" data-count="10">50+</div>
+                            <div class="stat-label">Довольных клиентов</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-counter" data-count="2500">2500+</div>
+                            <div class="stat-label">Часов работы</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Мои проекты</h2>
+                <p class="section-subtitle animate-on-scroll">Ознакомьтесь с моими последними работами</p>
+                
+                <div class="projects-container">
+                    <div class="projects-grid">
+                        <!-- Проект 1 -->
+                        <div class="project-card animate-on-scroll">
+                            <div class="project-image">
+                                <img src="assets/project1.jpg" alt="Проект 1">
+                            </div>
+                            <div class="project-content">
+                                <h3>Веб-приложение для конструктор столиков</h3>
+                                <p>Приложение для конструктора столиков в ресторанах</p>
+                                <div class="project-tech">
+                                    <span data-tech="React">React</span>
+                                    <span data-tech="Node.js">Node.js</span>
+                                    <span data-tech="react-draggable">react-draggable</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Демо</a>
+                                    <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Проект 2 -->
+                        <div class="project-card animate-on-scroll">
+                            <div class="project-image">
+                                <img src="assets/project2.jpg" alt="Проект 2">
+                            </div>
+                            <div class="project-content">
+                                <h3>Интернет-магазин электроники</h3>
+                                <p>Полнофункциональный интернет-магазин с каталогом товаров, корзиной и системой оплаты.</p>
+                                <div class="project-tech">
+                                    <span data-tech="Vue.js">Vue.js</span>
+                                    <span data-tech="Express">Express</span>
+                                    <span data-tech="PostgreSQL">PostgreSQL</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Демо</a>
+                                    <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Проект 3 -->
+                        <div class="project-card animate-on-scroll">
+                            <div class="project-image">
+                                <img src="assets/project3.jpg" alt="Проект 3">
+                            </div>
+                            <div class="project-content">
+                                <h3>Мобильное приложение для бронирования столиков</h3>
+                                <p>Приложение для бронирования столиков в ресторанах</p>
+                                <div class="project-tech">
+                                    <span data-tech="React Native">React Native</span>
+                                    <span data-tech="expo-router">expo-router</span>
+                                    <span data-tech="expo-font">expo-font</span>
+                                    <span data-tech="expo-image">expo-image</span>
+                                    <span data-tech="expo-linear-gradient">expo-linear-gradient</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Демо</a>
+                                    <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Проект 4 -->
+                        <div class="project-card animate-on-scroll">
+                            <div class="project-image">
+                                <img src="assets/project4.jpg" alt="Проект 4">
+                            </div>
+                            <div class="project-content">
+                                <h3>Платформа для онлайн-обучения</h3>
+                                <p>Образовательная платформа с видеоуроками, тестами и системой отслеживания прогресса.</p>
+                                <div class="project-tech">
+                                    <span>Angular</span>
+                                    <span>Django</span>
+                                    <span>AWS</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Демо</a>
+                                    <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="projects-navigation">
+                    <button class="project-nav-btn project-nav-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="project-nav-btn project-nav-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Мои навыки</h2>
+                <p class="section-subtitle animate-on-scroll">Технологии и инструменты, с которыми я работаю</p>
+                
+                <div class="skills-container">
+                    <!-- C++ -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-cplusplus-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">C++</h3>
+                            <p class="skill-description">Разработка высокопроизводительных приложений, системное программирование и работа с алгоритмами.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 92%"></div>
+                            </div>
+                            <div class="skill-percentage">92%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- C# -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-csharp-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">C#</h3>
+                            <p class="skill-description">Разработка приложений на платформе .NET, создание десктопных и веб-приложений.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 85%"></div>
+                            </div>
+                            <div class="skill-percentage">85%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-c-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">C</h3>
+                            <p class="skill-description">Низкоуровневое программирование, разработка встраиваемых систем и системных компонентов.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 88%"></div>
+                            </div>
+                            <div class="skill-percentage">88%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Python -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-python-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">Python</h3>
+                            <p class="skill-description">Разработка скриптов, анализ данных, машинное обучение и веб-разработка.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 90%"></div>
+                            </div>
+                            <div class="skill-percentage">90%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- JavaScript -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-javascript-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">JavaScript</h3>
+                            <p class="skill-description">Фронтенд-разработка, создание интерактивных веб-приложений и анимаций.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 95%"></div>
+                            </div>
+                            <div class="skill-percentage">95%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- React -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-react-original"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">React</h3>
+                            <p class="skill-description">Создание современных пользовательских интерфейсов и одностраничных приложений.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 87%"></div>
+                            </div>
+                            <div class="skill-percentage">87%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ruby -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-ruby-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">Ruby</h3>
+                            <p class="skill-description">Разработка веб-приложений с использованием Ruby on Rails и автоматизация задач.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 78%"></div>
+                            </div>
+                            <div class="skill-percentage">78%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Git -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-git-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">Git</h3>
+                            <p class="skill-description">Управление версиями, ветвление, слияние и совместная разработка.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 93%"></div>
+                            </div>
+                            <div class="skill-percentage">93%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- GitLab -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-gitlab-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">GitLab</h3>
+                            <p class="skill-description">CI/CD, управление проектами и автоматизация процессов разработки.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 82%"></div>
+                            </div>
+                            <div class="skill-percentage">82%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Expo -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="custom-icon">
+                                <path d="M11.9995 0C5.3695 0 0 5.37 0 12C0 18.63 5.3695 24 11.9995 24C18.63 24 24 18.63 24 12C24 5.37 18.63 0 11.9995 0ZM7.0395 16.5H16.9295L12.0045 7.5L7.0395 16.5Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">Expo</h3>
+                            <p class="skill-description">Разработка кроссплатформенных мобильных приложений с использованием React Native.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 80%"></div>
+                            </div>
+                            <div class="skill-percentage">80%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Java -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-java-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">Java</h3>
+                            <p class="skill-description">Разработка корпоративных приложений, Android-разработка и серверные решения.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 84%"></div>
+                            </div>
+                            <div class="skill-percentage">84%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- OpenGL -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="custom-icon">
+                                <path d="M12 0C5.372 0 0 5.372 0 12C0 18.628 5.372 24 12 24C18.628 24 24 18.628 24 12C24 5.372 18.628 0 12 0ZM12 21.6C6.697 21.6 2.4 17.303 2.4 12C2.4 6.697 6.697 2.4 12 2.4C17.303 2.4 21.6 6.697 21.6 12C21.6 17.303 17.303 21.6 12 21.6ZM15.6 7.2H8.4V9.6H15.6V7.2ZM15.6 10.8H8.4V13.2H15.6V10.8ZM15.6 14.4H8.4V16.8H15.6V14.4Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">OpenGL</h3>
+                            <p class="skill-description">Разработка графических приложений, визуализация и создание игровых движков.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 75%"></div>
+                            </div>
+                            <div class="skill-percentage">75%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Figma -->
+                    <div class="skill-card animate-on-scroll">
+                        <div class="skill-icon">
+                            <i class="devicon-figma-plain"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-name">Figma</h3>
+                            <p class="skill-description">Дизайн пользовательских интерфейсов, прототипирование и совместная работа над дизайном.</p>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="--progress: 89%"></div>
+                            </div>
+                            <div class="skill-percentage">89%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="github" class="github-section">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Мой GitHub профиль</h2>
+                <p class="typewriter animate-on-scroll" data-text="Добро пожаловать в мой мир кода и разработки!" data-speed="100"></p>
+                
+                <div class="github-profile">
+                    <div class="github-header">
+                        <div class="github-avatar">
+                            <img src="https://avatars.githubusercontent.com/u/qxzxf" alt="GitHub Avatar" onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
+                        </div>
+                        <div class="github-info">
+                            <h2>qxzxf</h2>
+                            <p>Разработчик и дизайнер, создающий инновационные цифровые решения</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="github-section-title">🌐 Социальные сети</h3>
+                    <div class="social-badges">
+                        <a href="https://discord.gg/awM2b4Rx" target="_blank">
+                            <img src="https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white" alt="Discord">
+                        </a>
+                        <a href="https://instagram.com/qxzxf.l" target="_blank">
+                            <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white" alt="Instagram">
+                        </a>
+                        <a href="mailto:itolkokoj@gmail.com">
+                            <img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" alt="Email">
+                        </a>
+                    </div>
+                    <h3 class="github-section-title">📊 GitHub статистика</h3>
+                    <div class="github-stats">
+                        <div class="stat-card">
+                            <img src="https://github-readme-stats.vercel.app/api?username=qxzxf&theme=dark&hide_border=false&include_all_commits=true&count_private=true" alt="GitHub Stats">
+                        </div>
+                        <div class="stat-card">
+                            <img src="https://github-readme-streak-stats.herokuapp.com/?user=qxzxf&theme=dark&hide_border=false" alt="GitHub Streak">
+                        </div>
+                        <div class="stat-card">
+                            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=qxzxf&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact" alt="Top Languages">
+                        </div>
+                    </div>
+                    
+                    <h3 class="github-section-title">🏆 GitHub трофеи</h3>
+                    <div class="github-trophies">
+                        <img src="https://github-profile-trophy.vercel.app/?username=qxzxf&theme=shadow_blue&no-frame=false&no-bg=true&margin-w=4" alt="GitHub Trophies">
+                    </div>
+                    
+                    <h3 class="github-section-title">✍️ Случайная цитата разработчика</h3>
+                    <div class="dev-quote">
+                        <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Dev Quote">
+                    </div>
+                    
+                    <h3 class="github-section-title">🔝 Топ репозиториев с моим вкладом</h3>
+                    <div class="top-repos">
+                        <img src="https://github-contributor-stats.vercel.app/api?username=qxzxf&limit=5&theme=dark&combine_all_yearly_contributions=true" alt="Top Contributed Repo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Связаться со мной</h2>
+                
+                <div class="contact-content">
+                    <div class="contact-info animate-on-scroll">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Местоположение</h3>
+                                <p>Астана, Казахстан</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email</h3>
+                                <p>kirill.botov@example.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Телефон</h3>
+                                <p>+7 (XXX) XXX-XXXX</p>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form animate-on-scroll">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required placeholder="Ваше имя">
+                            <label for="name">Ваше имя</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Ваш email" required>
+                            <label for="email">Ваш email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Тема" required>
+                            <label for="subject">Тема</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Ваше сообщение" required></textarea>
+                            <label for="message">Ваше сообщение</label>
+                        </div>
+                        <button type="submit" class="submit-btn animate-pulse">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer animate-gradient">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О проекте</h3>
+                    <p class="footer-text">Персональное портфолио qxzxf, демонстрирующее навыки в разработке и дизайне.</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/qxzxf" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://instagram.com/qxzxf.l" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://discord.gg/awM2b4Rx" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="mailto:itolkokoj@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <div class="footer-links">
+                        <a href="#home">Главная</a>
+                        <a href="#about">Обо мне</a>
+                        <a href="#skills">Навыки</a>
+                        <a href="#projects">Проекты</a>
+                        <a href="#github">GitHub</a>
+                        <a href="#contact">Контакты</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <div class="footer-links">
+                        <a href="mailto:itolkokoj@gmail.com">itolkokoj@gmail.com</a>
+                        <a href="https://discord.gg/awM2b4Rx" target="_blank">Discord</a>
+                        <a href="https://instagram.com/qxzxf.l" target="_blank">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 qxzxf. Все права защищены.<i class="fas fa-heart" style="color: var(--accent-color);"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Добавляем скрипты для новых эффектов в конец body -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Инициализация частиц
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS("particles-js", {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#6c5ce7"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#6c5ce7",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+            
+            // Инициализация 3D элемента
+            if (typeof THREE !== 'undefined') {
+                const container = document.getElementById('hero-3d');
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, 300 / 300, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ alpha: true });
+                renderer.setSize(300, 300);
+                container.appendChild(renderer.domElement);
+                
+                const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: 0x6c5ce7,
+                    wireframe: true
+                });
+                const torusKnot = new THREE.Mesh(geometry, material);
+                scene.add(torusKnot);
+                
+                camera.position.z = 30;
+                
+                function animate() {
+                    requestAnimationFrame(animate);
+                    torusKnot.rotation.x += 0.01;
+                    torusKnot.rotation.y += 0.01;
+                    renderer.render(scene, camera);
+                }
+                animate();
+            }
+            
+            // Инициализация анимаций при прокрутке
+            initScrollAnimations();
+        });
+        
+        // Функция для анимаций при прокрутке
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        
+                        // Запускаем анимацию
+                        if (entry.target.classList.contains('project-card') || 
+                            entry.target.classList.contains('skill-card') || 
+                            entry.target.classList.contains('contact-form')) {
+                            entry.target.style.animationPlayState = 'running';
+                        }
+                        
+                        // Отключаем наблюдение после анимации
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+        
+        // Переключение темы
+        function initThemeToggle() {
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function() {
+                    if (document.body.getAttribute('data-theme') === 'light') {
+                        document.body.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.body.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Проверка сохраненной темы
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.setAttribute('data-theme', 'light');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
