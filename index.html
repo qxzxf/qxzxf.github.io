@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Добавьте базовые стили напрямую в head для решения проблемы с загрузкой внешних стилей -->
     <style>
         :root {
             --bg-primary: #0a0a0a;
@@ -985,6 +986,7 @@
             box-shadow: 0 8px 30px rgba(108, 92, 231, 0.4);
         }
         
+        /* Добавление красивых анимаций на сайт */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1018,6 +1020,7 @@
             100% { background-position: 0% 50%; }
         }
         
+        /* Применение анимаций к элементам */
         .hero-content h1 {
             animation: slideInLeft 1s ease forwards;
         }
@@ -1147,9 +1150,11 @@
         }
     </style>
     
+    <!-- В секцию head добавьте следующую строку -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
 <body>
+    <!-- Добавить в начало body, перед основным контентом -->
     <div class="space-background">
         <div class="stars"></div>
         <div class="neon-grid"></div>
@@ -1189,12 +1194,12 @@
                     <a href="#">qxzxf</a>
                 </div>
                 <div class="nav-links">
-                    <a href="#home" class="nav-link">Главная</a>
-                    <a href="#about" class="nav-link">Обо мне</a>
-                    <a href="#skills" class="nav-link">Навыки</a>
-                    <a href="#projects" class="nav-link">Проекты</a>
-                    <a href="#github" class="nav-link">GitHub</a>
-                    <a href="#contact" class="nav-link">Контакты</a>
+                    <a href="#home" class="nav-link" data-translate="home">Главная</a>
+                    <a href="#about" class="nav-link" data-translate="about">Обо мне</a>
+                    <a href="#skills" class="nav-link" data-translate="skills">Навыки</a>
+                    <a href="#projects" class="nav-link" data-translate="projects">Проекты</a>
+                    <a href="#github" class="nav-link" data-translate="github">GitHub</a>
+                    <a href="#contact" class="nav-link" data-translate="contact">Контакты</a>
                     
                     <div class="theme-toggle">
                         <button id="theme-toggle-btn">
@@ -1217,33 +1222,32 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <span class="hero-subtitle">Привет, я</span>
-                        <h1 class="hero-title glitch">Kirill Botov</h1>
+                        <span class="hero-subtitle" data-translate="hello">Привет, я</span>
+                        <h1 class="hero-title" data-translate="name">Kirill Botov</h1>
                         <div class="typewriter">
-                            <span class="typing-text"></span>
-                            <span class="cursor-blink"></span>
+                            <span class="cursor-blink" data-translate="profession">Веб-разработчик</span>
                         </div>
-                        <p class="hero-description">
+                        <p class="hero-description" data-translate="hero-description">
                             Создаю современные, отзывчивые и интерактивные веб-приложения с использованием передовых технологий.
                         </p>
                         <div class="hero-stats">
                             <div class="stat-item">
                                 <span class="stat-number">15+</span>
-                                <span class="stat-label">Проектов</span>
+                                <span class="stat-label" data-translate="projects-count">Проектов</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-number">3+</span>
-                                <span class="stat-label">Года опыта</span>
+                                <span class="stat-label" data-translate="years-experience">Года опыта</span>
                             </div>
                         </div>
                         <div class="hero-buttons">
                             <a href="#projects" class="hero-btn hero-btn-primary">
                                 <i class="fas fa-eye"></i>
-                                <span>Смотреть проекты</span>
+                                <span data-translate="view-project">Смотреть проекты</span>
                             </a>
                             <a href="#contact" class="hero-btn hero-btn-secondary">
                                 <i class="fas fa-paper-plane"></i>
-                                <span>Связаться</span>
+                                <span data-translate="contact">Связаться</span>
                             </a>
                         </div>
                     </div>
@@ -1256,20 +1260,20 @@
 
         <section id="about" class="about-section">
             <div class="container">
-                <h2 class="section-title">Обо мне</h2>
+                <h2 class="section-title" data-translate="about">Обо мне</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p class="about-text">
+                        <p class="about-text" data-translate="main-description">
                             Я веб-разработчик с опытом создания современных и функциональных веб-приложений. Моя цель — разрабатывать интуитивно понятные и эстетически приятные цифровые решения, которые решают реальные проблемы.
                         </p>
                         <div class="about-info">
                             <div class="info-column">
                                 <div class="info-item">
-                                    <span class="info-label">Местоположение</span>
-                                    <span class="info-value">Астана, Казахстан</span>
+                                    <span class="info-label" data-translate="location">Местоположение</span>
+                                    <span class="info-value" data-translate="location-value">Астана, Казахстан</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Телефон</span>
+                                    <span class="info-label" data-translate="phone">Телефон</span>
                                     <span class="info-value">+7 (777) 123-45-67</span>
                                 </div>
                                 <div class="info-item">
@@ -1279,22 +1283,22 @@
                             </div>
                             <div class="info-column">
                                 <div class="info-item">
-                                    <span class="info-label">Опыт</span>
-                                    <span class="info-value">3+ лет в веб-разработке</span>
+                                    <span class="info-label" data-translate="experience">Опыт</span>
+                                    <span class="info-value" data-translate="experience-value">3+ лет в веб-разработке</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Образование</span>
-                                    <span class="info-value">Бакалавр компьютерных наук</span>
+                                    <span class="info-label" data-translate="education">Образование</span>
+                                    <span class="info-value" data-translate="education-value">Бакалавр компьютерных наук</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Языки</span>
-                                    <span class="info-value">Русский, Английский</span>
+                                    <span class="info-label" data-translate="languages">Языки</span>
+                                    <span class="info-value" data-translate="languages-value">Русский, Английский</span>
                                 </div>
                             </div>
                         </div>
                         <div class="about-buttons">
-                            <a href="#contact" class="about-btn">Связаться</a>
-                            <a href="#" class="about-btn secondary">Скачать резюме</a>
+                            <a href="#contact" class="about-btn" data-translate="contact">Связаться</a>
+                            <a href="#" class="about-btn secondary" data-translate="download-cv">Скачать резюме</a>
                         </div>
                     </div>
                     <div class="about-stats">
@@ -1303,21 +1307,21 @@
                                 <i class="fas fa-code"></i>
                             </div>
                             <div class="stat-counter" data-count="15">15+</div>
-                            <div class="stat-label">Завершенных проектов</div>
+                            <div class="stat-label" data-translate="completed-projects">Завершенных проектов</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">
                                 <i class="fas fa-smile"></i>
                             </div>
                             <div class="stat-counter" data-count="10">50+</div>
-                            <div class="stat-label">Довольных клиентов</div>
+                            <div class="stat-label" data-translate="happy-clients">Довольных клиентов</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div class="stat-counter" data-count="2500">2500+</div>
-                            <div class="stat-label">Часов работы</div>
+                            <div class="stat-label" data-translate="hours-worked">Часов работы</div>
                         </div>
                     </div>
                 </div>
@@ -1326,8 +1330,8 @@
 
         <section id="projects" class="projects-section">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">Мои проекты</h2>
-                <p class="section-subtitle animate-on-scroll">Ознакомьтесь с моими последними работами</p>
+                <h2 class="section-title animate-on-scroll" data-translate="projects-title">Мои проекты</h2>
+                <p class="section-subtitle animate-on-scroll" data-translate="projects-subtitle">Ознакомьтесь с моими последними работами</p>
                 
                 <div class="projects-container">
                     <div class="projects-grid">
@@ -1382,6 +1386,8 @@
                                 <div class="project-tech">
                                     <span data-tech="React Native">React Native</span>
                                     <span data-tech="expo-router">expo-router</span>
+                                    <span data-tech="expo-font">expo-font</span>
+                                    <span data-tech="expo-image">expo-image</span>
                                     <span data-tech="expo-linear-gradient">expo-linear-gradient</span>
                                 </div>
                                 <div class="project-links">
@@ -1422,8 +1428,8 @@
 
         <section id="skills" class="skills-section">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">Мои навыки</h2>
-                <p class="section-subtitle animate-on-scroll">Технологии и инструменты, с которыми я работаю</p>
+                <h2 class="section-title animate-on-scroll" data-translate="skills-title">Мои навыки</h2>
+                <p class="section-subtitle animate-on-scroll" data-translate="skills-subtitle">Технологии и инструменты, с которыми я работаю</p>
                 
                 <div class="skills-container">
                     <!-- C++ -->
@@ -1630,8 +1636,8 @@
 
         <section id="github" class="github-section">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">Мой GitHub профиль</h2>
-                <p class="typewriter animate-on-scroll" data-text="Добро пожаловать в мой мир кода и разработки!" data-speed="100"></p>
+                <h2 class="section-title animate-on-scroll" data-translate="github-title">Мой GitHub профиль</h2>
+                <p data-translate="github-desc" class="typewriter animate-on-scroll" data-text="Добро пожаловать в мой мир кода и разработки!" data-speed="100"></p>
                 
                 <div class="github-profile">
                     <div class="github-header">
@@ -1689,7 +1695,7 @@
 
         <section id="contact" class="contact">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">Связаться со мной</h2>
+                <h2 class="section-title animate-on-scroll" data-translate="contact-title">Связаться со мной</h2>
                 
                 <div class="contact-content">
                     <div class="contact-info animate-on-scroll">
@@ -1698,8 +1704,8 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="contact-text">
-                                <h3>Местоположение</h3>
-                                <p>Астана, Казахстан</p>
+                                <h3 data-translate="location">Местоположение</h3>
+                                <p data-translate="location-value">Астана, Казахстан</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1716,7 +1722,7 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div class="contact-text">
-                                <h3>Телефон</h3>
+                                <h3 data-translate="phone">Телефон</h3>
                                 <p>+7 (XXX) XXX-XXXX</p>
                             </div>
                         </div>
@@ -1730,8 +1736,8 @@
                     
                     <form class="contact-form animate-on-scroll">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" required placeholder="Ваше имя">
-                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" required data-translate-placeholder="name-placeholder">
+                            <label for="name" data-translate="name-label">Ваше имя</label>
                         </div>
                         <div class="form-group">
                             <input type="email" id="email" name="email" placeholder="Ваш email" required>
@@ -1750,14 +1756,31 @@
                 </div>
             </div>
         </section>
+
+        <!-- Обновленная секция с игрой -->
+        <section id="game" class="section">
+            <div class="container">
+                <h2 class="section-title">Bobr Kurwa</h2>
+                <p class="section-subtitle">Кликай по бобру и покупай улучшения!</p>
+                <div class="game-container">
+                    <div class="shop-container left" id="click-power-shop">
+                        <div class="shop-title">Улучшение клика</div>
+                    </div>
+                    <div class="tapper-game"></div>
+                    <div class="shop-container right" id="auto-click-shop">
+                        <div class="shop-title">Автоматизация</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer animate-gradient">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>О проекте</h3>
-                    <p class="footer-text">Персональное портфолио qxzxf, демонстрирующее навыки в разработке и дизайне.</p>
+                    <h3 data-translate="about-project">О проекте</h3>
+                    <p class="footer-text" data-translate="footer-description">Персональное портфолио Кирилла Ботова, демонстрирующее навыки в разработке и дизайне.</p>
                     <div class="footer-social">
                         <a href="https://github.com/qxzxf" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="https://instagram.com/qxzxf.l" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -1766,18 +1789,18 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Навигация</h3>
+                    <h3 data-translate="navigation">Навигация</h3>
                     <div class="footer-links">
-                        <a href="#home">Главная</a>
-                        <a href="#about">Обо мне</a>
-                        <a href="#skills">Навыки</a>
-                        <a href="#projects">Проекты</a>
-                        <a href="#github">GitHub</a>
-                        <a href="#contact">Контакты</a>
+                        <a href="#home" data-translate="home">Главная</a>
+                        <a href="#about" data-translate="about">Обо мне</a>
+                        <a href="#skills" data-translate="skills">Навыки</a>
+                        <a href="#projects" data-translate="projects">Проекты</a>
+                        <a href="#github" data-translate="github">GitHub</a>
+                        <a href="#contact" data-translate="contact">Контакты</a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Контакты</h3>
+                    <h3 data-translate="contacts">Контакты</h3>
                     <div class="footer-links">
                         <a href="mailto:itolkokoj@gmail.com">itolkokoj@gmail.com</a>
                         <a href="https://discord.gg/awM2b4Rx" target="_blank">Discord</a>
@@ -1786,7 +1809,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 qxzxf. Все права защищены.<i class="fas fa-heart" style="color: var(--accent-color);"></i></p>
+                <p data-translate="copyright">&copy; 2025 qxzxf. Все права защищены.<i class="fas fa-heart" style="color: var(--accent-color);"></i></p>
             </div>
         </div>
     </footer>
