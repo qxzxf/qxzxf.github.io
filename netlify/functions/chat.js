@@ -1,7 +1,9 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 exports.handler = async function(event, context) {
-    // Обработка CORS preflight запросов
+    // логирование для отладки
+    console.log('Starting function execution');
+
     if (event.httpMethod === 'OPTIONS') {
         return {
             statusCode: 200,
@@ -25,22 +27,48 @@ exports.handler = async function(event, context) {
 
     try {
         const { message } = JSON.parse(event.body);
+        console.log('Received message:', message);
         
-        // Проверяем наличие API ключа
-        if (!process.env.GEMINI_API_KEY) {
+        // Проверяем API ключ
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) {
+            console.error('API key is missing');
             throw new Error('API key is not configured');
         }
+        console.log('API key is present');
 
-        // Инициализация Gemini API
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        // Инициализация Gemini
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-pro",
+            generationConfig: {
+                maxOutputTokens: 2048,
+                temperature: 0.7
+            }
+        });
 
-        // Настройка контекста для русского языка
-        const prompt = `Ты - полезный ассистент. Отвечай на русском языке. Вопрос пользователя: ${message}`;
+        console.log('Sending request to Gemini');
+        
+        // Создаем чат
+        const chat = model.startChat({
+            history: [
+                {
+                    role: "user",
+                    parts: "Пожалуйста, отвечай на русском языке.",
+                },
+                {
+                    role: "model",
+                    parts: "Хорошо, я буду отвечать на русском языке.",
+                }
+            ],
+        });
 
-        const result = await model.generateContent(prompt);
+        // Получаем ответ
+        const result = await chat.sendMessage(message);
         const response = await result.response;
         const text = response.text();
+        
+        console.log('Received response from Gemini');
 
         return {
             statusCode: 200,
@@ -56,8 +84,8 @@ exports.handler = async function(event, context) {
     } catch (error) {
         console.error('Function error:', error);
         
-        // Более информативные сообщения об ошибках
         let errorMessage = 'Internal Server Error';
+        let errorDetails = error.message;
         let statusCode = 500;
 
         if (error.message.includes('API key')) {
@@ -76,7 +104,7 @@ exports.handler = async function(event, context) {
             },
             body: JSON.stringify({ 
                 error: errorMessage,
-                details: error.message 
+                details: errorDetails
             })
         };
     }
