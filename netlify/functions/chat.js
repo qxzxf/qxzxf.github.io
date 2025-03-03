@@ -31,14 +31,20 @@ exports.handler = async function(event, context) {
             throw new Error('API key is not configured');
         }
 
-        const anthropic = new Anthropic({
+        const client = new Anthropic({
             apiKey: process.env.CLAUDE_API_KEY,
         });
 
-        const response = await anthropic.messages.create({
+        const response = await client.messages.create({
             model: "claude-3-opus-20240229",
-            max_tokens: 1000,
-            messages: [{ role: "user", content: message }]
+            max_tokens: 4096,
+            system: "You are Claude, an AI assistant. Respond in Russian language.",
+            messages: [
+                {
+                    role: "user",
+                    content: message
+                }
+            ]
         });
 
         return {
@@ -47,7 +53,9 @@ exports.handler = async function(event, context) {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            body: JSON.stringify({ content: response.content[0].text })
+            body: JSON.stringify({ 
+                content: response.content[0].text 
+            })
         };
 
     } catch (error) {
