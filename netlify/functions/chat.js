@@ -37,16 +37,10 @@ exports.handler = async function(event, context) {
         }
         console.log('API key is present');
 
-        // Инициализация с явным указанием версии API
+        // Используем новую версию модели
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.0-pro",
-            generationConfig: {
-                temperature: 0.7,
-                topK: 40,
-                topP: 0.95,
-                maxOutputTokens: 2048,
-            }
+            model: "gemini-2.0-flash"
         });
 
         console.log('Sending request to Gemini');
