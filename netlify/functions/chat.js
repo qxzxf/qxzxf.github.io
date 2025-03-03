@@ -1,9 +1,25 @@
 const { Anthropic } = require('@anthropic-ai/sdk');
 
 exports.handler = async function(event, context) {
+    // Обработка CORS preflight запросов
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'POST, OPTIONS'
+            },
+            body: ''
+        };
+    }
+
     if (event.httpMethod !== "POST") {
         return {
             statusCode: 405,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ error: "Method Not Allowed" })
         };
     }
@@ -31,16 +47,22 @@ exports.handler = async function(event, context) {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type',
-                'Access-Control-Allow-Methods': 'POST'
+                'Access-Control-Allow-Methods': 'POST, OPTIONS'
             },
             body: JSON.stringify(response)
         };
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Function error:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: "Internal Server Error", details: error.message })
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify({ 
+                error: "Internal Server Error", 
+                details: error.message 
+            })
         };
     }
 }; 
