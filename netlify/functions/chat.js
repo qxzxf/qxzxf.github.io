@@ -1,4 +1,4 @@
-const { Anthropic } = require('@anthropic-ai/sdk');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 exports.handler = async function(event, context) {
     // Обработка CORS preflight запросов
@@ -27,25 +27,20 @@ exports.handler = async function(event, context) {
         const { message } = JSON.parse(event.body);
         
         // Проверяем наличие API ключа
-        if (!process.env.CLAUDE_API_KEY) {
+        if (!process.env.GEMINI_API_KEY) {
             throw new Error('API key is not configured');
         }
 
-        const client = new Anthropic({
-            apiKey: process.env.CLAUDE_API_KEY,
-        });
+        // Инициализация Gemini API
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-        const response = await client.messages.create({
-            model: "claude-3-opus-20240229",
-            max_tokens: 4096,
-            system: "You are Claude, an AI assistant. Respond in Russian language.",
-            messages: [
-                {
-                    role: "user",
-                    content: message
-                }
-            ]
-        });
+        // Настройка контекста для русского языка
+        const prompt = `Ты - полезный ассистент. Отвечай на русском языке. Вопрос пользователя: ${message}`;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
 
         return {
             statusCode: 200,
@@ -54,7 +49,7 @@ exports.handler = async function(event, context) {
                 'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify({ 
-                content: response.content[0].text 
+                content: text 
             })
         };
 
@@ -68,9 +63,9 @@ exports.handler = async function(event, context) {
         if (error.message.includes('API key')) {
             errorMessage = 'API Configuration Error';
             statusCode = 503;
-        } else if (error.message.includes('credits')) {
-            errorMessage = 'API Credit Limit Reached';
-            statusCode = 402;
+        } else if (error.message.includes('quota')) {
+            errorMessage = 'API Quota Exceeded';
+            statusCode = 429;
         }
 
         return {
