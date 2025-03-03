@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     <style>
         /* Базовые стили из основного сайта */
@@ -1129,9 +1128,6 @@ with open('file.txt') as f:  # Работа с файлами</code></pre>
                 </div>
 
                 <div class="offline-actions">
-                    <button class="download-pdf" onclick="generatePDF()">
-                        <i class="fas fa-file-pdf"></i> Скачать PDF
-                    </button>
                     <button class="add-bookmark">
                         <i class="fas fa-bookmark"></i> Добавить в закладки
                     </button>
@@ -1190,51 +1186,6 @@ with open('file.txt') as f:  # Работа с файлами</code></pre>
                     });
                 });
             });
-
-            // Скачивание PDF
-            function generatePDF() {
-                // Элемент, который нужно сконвертировать в PDF
-                const element = document.querySelector('.devcheats-grid');
-                
-                // Настройки для PDF
-                const opt = {
-                    margin: 1,
-                    filename: 'devcheat-шпаргалки.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { 
-                        scale: 2,
-                        useCORS: true,
-                        letterRendering: true
-                    },
-                    jsPDF: { 
-                        unit: 'cm', 
-                        format: 'a4', 
-                        orientation: 'portrait' 
-                    },
-                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-                };
-
-                // Показываем индикатор загрузки
-                const loadingIndicator = document.createElement('div');
-                loadingIndicator.className = 'loading-indicator';
-                loadingIndicator.innerHTML = `
-                    <div class="loading-spinner"></div>
-                    <p>Генерация PDF...</p>
-                `;
-                document.body.appendChild(loadingIndicator);
-
-                // Генерируем PDF
-                html2pdf().set(opt).from(element).save()
-                    .then(() => {
-                        // Удаляем индикатор загрузки после завершения
-                        document.body.removeChild(loadingIndicator);
-                    })
-                    .catch(err => {
-                        console.error('Ошибка при генерации PDF:', err);
-                        alert('Произошла ошибка при создании PDF. Попробуйте позже.');
-                        document.body.removeChild(loadingIndicator);
-                    });
-            }
 
             // Добавление в закладки
             document.querySelector('.add-bookmark').addEventListener('click', function() {
