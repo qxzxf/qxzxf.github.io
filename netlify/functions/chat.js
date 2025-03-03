@@ -64,11 +64,24 @@ exports.handler = async function(event, context) {
         // Генерируем ответ
         const result = await model.generateContent(prompt);
         const response = await result.response;
-        const text = response.text();
+        let text = response.text();
         
-        // Дополнительная обработка текста для улучшения форматирования
+        // Улучшенное форматирование текста
         const formattedText = text
-            .replace(/\n{3,}/g, '\n\n') // Убираем лишние переносы строк
+            // Добавляем переносы строк перед заголовками
+            .replace(/([^#])(#{1,3}\s)/g, '$1\n\n$2')
+            // Добавляем переносы после заголовков
+            .replace(/(#{1,3}.*)\n(?!#|\n)/g, '$1\n\n')
+            // Добавляем переносы перед списками
+            .replace(/([^*\n-])(\*\s|\-\s)/g, '$1\n\n$2')
+            // Добавляем переносы между элементами списка
+            .replace(/(\*\s.*)\n(?!\*\s|\n|-\s)/g, '$1\n\n')
+            // Добавляем переносы перед и после таблиц
+            .replace(/([^|])((?:\|[^|]*)+\|)/g, '$1\n\n$2')
+            .replace(/((?:\|[^|]*)+\|)([^|])/g, '$1\n\n$2')
+            // Убираем множественные переносы строк (более двух)
+            .replace(/\n{3,}/g, '\n\n')
+            // Убираем лишние пробелы
             .trim();
 
         console.log('Received response from Gemini');
