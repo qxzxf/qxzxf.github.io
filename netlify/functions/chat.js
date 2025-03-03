@@ -49,22 +49,11 @@ exports.handler = async function(event, context) {
 
         console.log('Sending request to Gemini');
         
-        // Создаем чат
-        const chat = model.startChat({
-            history: [
-                {
-                    role: "user",
-                    parts: "Пожалуйста, отвечай на русском языке.",
-                },
-                {
-                    role: "model",
-                    parts: "Хорошо, я буду отвечать на русском языке.",
-                }
-            ],
-        });
+        // Формируем промпт для русского языка
+        const prompt = `Ты - полезный ассистент. Пожалуйста, отвечай на русском языке на следующий вопрос: ${message}`;
 
-        // Получаем ответ
-        const result = await chat.sendMessage(message);
+        // Отправляем запрос напрямую, без использования чата
+        const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
         
