@@ -45,11 +45,18 @@ exports.handler = async function(event, context) {
 
         console.log('Sending request to Gemini');
         
-        // Создаем промпт
+        // Создаем промпт с инструкциями по форматированию
         const prompt = {
             contents: [{
                 parts: [{
-                    text: `Ты - полезный ассистент. Пожалуйста, отвечай на русском языке на следующий вопрос: ${message}`
+                    text: `Ты - полезный ассистент. Пожалуйста, отвечай на русском языке. 
+                    Всегда форматируй свои ответы в markdown формате, используя:
+                    - Заголовки (# ## ###)
+                    - Списки (- или *)
+                    - Жирный текст (**) где это важно
+                    - Разделяй текст на логические блоки
+
+                    Вопрос: ${message}`
                 }]
             }]
         };
@@ -59,6 +66,11 @@ exports.handler = async function(event, context) {
         const response = await result.response;
         const text = response.text();
         
+        // Дополнительная обработка текста для улучшения форматирования
+        const formattedText = text
+            .replace(/\n{3,}/g, '\n\n') // Убираем лишние переносы строк
+            .trim();
+
         console.log('Received response from Gemini');
 
         return {
@@ -68,7 +80,7 @@ exports.handler = async function(event, context) {
                 'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify({ 
-                content: text 
+                content: formattedText 
             })
         };
 
