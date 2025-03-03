@@ -316,17 +316,20 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <a href="https://qxzxf.netlify.app/">qxzxf</a>
+                    <a href="https://qxzxf.github.io">qxzxf</a>
                 </div>
                 <div class="nav-links">
-                    <a href="https://qxzxf.netlify.app/#home" class="nav-link">Главная</a>
-                    <a href="https://qxzxf.netlify.app/#about" class="nav-link">Обо мне</a>
-                    <a href="https://qxzxf.netlify.app/#projects" class="nav-link">Проекты</a>
-                    <a href="https://qxzxf.netlify.app/ai" class="nav-link">AI Chat</a>
+                    <a href="https://qxzxf.github.io/#home" class="nav-link">Главная</a>
+                    <a href="https://qxzxf.github.io/#about" class="nav-link">Обо мне</a>
+                    <a href="https://qxzxf.github.io/#projects" class="nav-link">Проекты</a>
+                    <a href="https://qxzxf.github.io/ai" class="nav-link">AI Chat</a>
                 </div>
             </nav>
         </div>
     </header>
+
+    <div class="ai-response">
+    </div>
 
     <main>
         <section class="ai-chat-section">
@@ -395,13 +398,36 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user-message' : 'assistant-message'}`;
             
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-            messageContent.textContent = content;
+            if (!isUser) {
+                // Для ответов AI форматируем markdown
+                const formattedContent = content
+                    // Сначала обрабатываем заголовки с номерами
+                    .replace(/(\d+)\.\s+\*\*([^*]+)\*\*/g, '<h2 class="section-header">$1. $2</h2>')
+                    
+                    // Затем обрабатываем оставшиеся двойные звездочки
+                    .replace(/\*\*([^*]+)\*\*/g, '<span class="highlight">$1</span>')
+                    
+                    // Маркированные списки
+                    .replace(/•\s+(.*?)(?=(\n|$))/g, '<div class="list-item">• $1</div>')
+                    
+                    // Разделители секций
+                    .replace(/---/g, '<hr class="section-divider">')
+                    
+                    // Переносы строк
+                    .replace(/\n/g, '<br>');
+
+                const aiResponseDiv = document.createElement('div');
+                aiResponseDiv.className = 'ai-response';
+                aiResponseDiv.innerHTML = formattedContent;
+                messageDiv.appendChild(aiResponseDiv);
+            } else {
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                messageContent.textContent = content;
+                messageDiv.appendChild(messageContent);
+            }
             
-            messageDiv.appendChild(messageContent);
             messagesContainer.appendChild(messageDiv);
-            
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
@@ -440,7 +466,7 @@
                     typingIndicator.remove();
                 }
 
-                let errorMessage = 'Произошла ошибка при получении ответа.';
+                let errorMessage = 'Привет! С удовольствием объясню разницу между процессорами AMD Ryzen 5 5600G и Ryzen 5 5600X. --- 1. **Архитектура и Назначение* • • **Ryzen 5 5600G:* • Этот процессор основан на архитектуре **Zen 3* • и имеет встроенную графику **Radeon Vega**. Он предназначен для пользователей, которым нужна производительность CPU и GPU в одном чипе, что позволяет собрать компьютер без дискретной видеокарты. • **Ryzen 5 5600X:* • Этот процессор также основан на архитектуре **Zen 3**, но не имеет встроенной графики. Он ориентирован на пользователей, у которых уже есть дискретная видеокарта, и которым нужна максимальная производительность CPU для игр и других ресурсоемких задач. --- 2. **Технические Характеристики* • **Ryzen 5 5600G:* • • Ядра/Потоки: 6/12 • Базовая тактовая частота: 3.9 ГГц • Максимальная тактовая частота: 4.4 ГГц • Встроенная графика: **Radeon Vega 7* • • TDP: 65 Вт • Разблокированный множитель: Да **Ryzen 5 5600X:* • • Ядра/Потоки: 6/12 • Базовая тактовая частота: 3.7 ГГц • Максимальная тактовая частота: 4.6 ГГц • Встроенная графика: Отсутствует (требуется дискретная видеокарта) • TDP: 65 Вт • Разблокированный множитель: Да --- 3. **Производительность* • • **CPU:* • **Ryzen 5 5600X* • обычно немного превосходит **Ryzen 5 5600G* • в задачах, требующих высокой производительности CPU, благодаря более высокой тактовой частоте. • **GPU:* • **Ryzen 5 5600G* • имеет встроенную графику **Radeon Vega 7**, что позволяет играть в некоторые игры на низких или средних настройках без дискретной видеокарты. **Ryzen 5 5600X* • требует дискретную видеокарту. --- 4. **Сценарии Использования* • • **Ryzen 5 5600G:* • Идеален для сборок, где нужна производительность CPU и GPU, например, для офисных компьютеров, мультимедийных центров или бюджетных игровых сборок без дискретной видеокарты. • **Ryzen 5 5600X:* • Лучший выбор для игровых компьютеров или рабочих станций, где важна максимальная производительность CPU и уже есть дискретная видеокарта. В заключение, основное различие между **Ryzen 5 5600G* • и **Ryzen 5 5600X* • заключается в наличии встроенной графики и, как следствие, в целевой аудитории и сценариях использования. **Ryzen 5 5600G* • имеет встроенную графику и подходит для систем без дискретной видеокарты, а **Ryzen 5 5600X* • обеспечивает немного большую производительность CPU, но требует дискретную видеокарту.';
                 
                 if (error.message.includes('quota')) {
                     errorMessage = 'Превышен лимит запросов к API. Пожалуйста, попробуйте позже.';
