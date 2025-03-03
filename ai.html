@@ -369,12 +369,10 @@
 
         async function sendMessageToAPI(message) {
             try {
-                // URL с Netlify
-                const response = await fetch('https://qxzxf.netlify.app/.netlify/functions/chat', {
+                const response = await fetch('/.netlify/functions/chat', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ message })
                 });
@@ -386,11 +384,10 @@
                 }
 
                 const data = await response.json();
-                console.log('API Response:', data);
                 return data.content;
             } catch (error) {
                 console.error('Error details:', error);
-                throw error; // Пробрасываем ошибку для обработки в handleMessage
+                throw error;
             }
         }
 
@@ -424,10 +421,9 @@
                 textarea.value = '';
                 textarea.style.height = 'auto';
 
-                // Создаем индикатор печати
                 typingIndicator = document.createElement('div');
                 typingIndicator.className = 'message assistant-message typing';
-                typingIndicator.textContent = 'Claude печатает...';
+                typingIndicator.textContent = 'AI печатает...';
                 messagesContainer.appendChild(typingIndicator);
 
                 const response = await sendMessageToAPI(message);
@@ -444,13 +440,12 @@
                     typingIndicator.remove();
                 }
 
-                // Более понятные сообщения об ошибках для пользователя
                 let errorMessage = 'Произошла ошибка при получении ответа.';
                 
-                if (error.message.includes('API Configuration Error')) {
+                if (error.message.includes('quota')) {
+                    errorMessage = 'Превышен лимит запросов к API. Пожалуйста, попробуйте позже.';
+                } else if (error.message.includes('API Configuration')) {
                     errorMessage = 'Ошибка конфигурации API. Пожалуйста, свяжитесь с администратором.';
-                } else if (error.message.includes('API Credit Limit')) {
-                    errorMessage = 'Достигнут лимит API запросов. Попробуйте позже.';
                 }
 
                 addMessage(errorMessage, false);
