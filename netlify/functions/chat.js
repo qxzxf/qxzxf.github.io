@@ -37,22 +37,30 @@ exports.handler = async function(event, context) {
         }
         console.log('API key is present');
 
-        // Инициализация Gemini
+        // Инициализация с явным указанием версии API
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ 
-            model: "gemini-pro",
+            model: "gemini-1.0-pro",
             generationConfig: {
+                temperature: 0.7,
+                topK: 40,
+                topP: 0.95,
                 maxOutputTokens: 2048,
-                temperature: 0.7
             }
         });
 
         console.log('Sending request to Gemini');
         
-        // Формируем промпт для русского языка
-        const prompt = `Ты - полезный ассистент. Пожалуйста, отвечай на русском языке на следующий вопрос: ${message}`;
+        // Создаем промпт
+        const prompt = {
+            contents: [{
+                parts: [{
+                    text: `Ты - полезный ассистент. Пожалуйста, отвечай на русском языке на следующий вопрос: ${message}`
+                }]
+            }]
+        };
 
-        // Отправляем запрос напрямую, без использования чата
+        // Генерируем ответ
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
