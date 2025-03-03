@@ -414,6 +414,8 @@
             const message = textarea.value.trim();
             if (!message) return;
 
+            let typingIndicator = null;
+
             try {
                 isProcessing = true;
                 sendButton.disabled = true;
@@ -422,18 +424,36 @@
                 textarea.value = '';
                 textarea.style.height = 'auto';
 
-                const typingIndicator = document.createElement('div');
+                // Создаем индикатор печати
+                typingIndicator = document.createElement('div');
                 typingIndicator.className = 'message assistant-message typing';
                 typingIndicator.textContent = 'Claude печатает...';
                 messagesContainer.appendChild(typingIndicator);
 
                 const response = await sendMessageToAPI(message);
-                typingIndicator.remove();
+                
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+                
                 addMessage(response, false);
             } catch (error) {
                 console.error('Chat error:', error);
-                typingIndicator?.remove();
-                addMessage('Произошла ошибка при получении ответа. Пожалуйста, попробуйте позже.', false);
+                
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+
+                // Более понятные сообщения об ошибках для пользователя
+                let errorMessage = 'Произошла ошибка при получении ответа.';
+                
+                if (error.message.includes('API Configuration Error')) {
+                    errorMessage = 'Ошибка конфигурации API. Пожалуйста, свяжитесь с администратором.';
+                } else if (error.message.includes('API Credit Limit')) {
+                    errorMessage = 'Достигнут лимит API запросов. Попробуйте позже.';
+                }
+
+                addMessage(errorMessage, false);
             } finally {
                 isProcessing = false;
                 sendButton.disabled = false;
