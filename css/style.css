@@ -40,6 +40,7 @@ body {
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
+    cursor: default;
 }
 
 body::before {
@@ -67,6 +68,7 @@ a {
     text-decoration: none;
     color: var(--text-primary);
     transition: color var(--transition-normal);
+    cursor: pointer;
 }
 
 a:hover {
@@ -230,6 +232,7 @@ input, textarea {
     font-size: 1rem;
     transition: all var(--transition-normal);
     margin-bottom: 1.5rem;
+    cursor: text;
 }
 
 input:focus, textarea:focus {
@@ -1008,103 +1011,6 @@ body[data-theme="light"] .fa-sun {
     60% { clip: rect(22px, 450px, 35px, 0); }
     80% { clip: rect(64px, 450px, 78px, 0); }
     100% { clip: rect(37px, 450px, 92px, 0); }
-}
-
-/* Полностью переработанные стили для кастомного курсора */
-.cursor {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s;
-    opacity: 1;
-    mix-blend-mode: difference;
-    left: 0;
-    top: 0;
-    transform: translate(-50%, -50%);
-}
-
-.cursor-follower {
-    position: fixed;
-    width: 30px;
-    height: 30px;
-    border: 2px solid var(--accent-color-2);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transition: all 0.3s ease;
-    opacity: 0.7;
-    left: 0;
-    top: 0;
-    transform: translate(-50%, -50%);
-}
-
-.cursor-hover {
-    width: 20px;
-    height: 20px;
-    background-color: var(--accent-color-2);
-}
-
-.cursor-follower-hover {
-    width: 40px;
-    height: 40px;
-    border-color: var(--accent-color);
-    opacity: 0.5;
-}
-
-.cursor-active {
-    transform: translate(-50%, -50%) scale(0.7);
-}
-
-.cursor-follower-active {
-    transform: translate(-50%, -50%) scale(0.7);
-}
-
-/* Скрываем курсор на всех интерактивных элементах */
-a, button, .btn, input, textarea, .interactive-card {
-    cursor: none;
-}
-
-/* Скрываем стандартный курсор на всей странице */
-html, body {
-    cursor: none;
-}
-
-/* Стили для прелоадера */
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.loader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader-spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    border-top-color: var(--accent-color);
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
 
 /* Улучшенные стили для секции "Обо мне" */
@@ -5303,32 +5209,2764 @@ body[data-theme="light"] .project-tech span:hover {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* Анимация для кнопок */
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.shop-buy-btn:not(:disabled) {
+    animation: buttonPulse 2s infinite;
+}
+
+/* Общие утилиты */
+.hidden {
+    display: none;
+}
+
+/* Анимации для монет */
+@keyframes coinPop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2) translateY(-20px);
+        opacity: 0;
+    }
+}
+
+.coin-popup {
+    position: absolute;
+    color: #ffd700;
+    pointer-events: none;
+    animation: coinPop 0.5s ease-out forwards;
+}
+
+/* Стили для Pacman */
+.pacman-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius-lg);
+}
+
+#pacmanCanvas {
+    border: 2px solid var(--accent-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.control-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-md);
+    background: var(--gradient-1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+/* Стили для кнопки возврата */
+.back-to-games {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.back-to-games .control-btn {
+    background: var(--gradient-2);
+}
+/* Обновленные стили для контейнеров игр */
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.game-container.hidden {
+    display: none;
+}
+
+.game-container:not(.hidden) {
+    opacity: 1;
+    pointer-events: all;
+} 
+
+/* Адаптация космического фона для светлой темы */
+body[data-theme="light"] .space-background {
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa, #ffffff);
+}
+
+/* Адаптация звезд для светлой темы */
+body[data-theme="light"] .stars {
+    background: 
+        radial-gradient(1px 1px at 25% 25%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(1px 1px at 50% 50%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(1px 1px at 75% 75%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(2px 2px at 15% 85%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(2px 2px at 85% 15%, var(--accent-color) 1px, transparent 0);
+    opacity: 0.3;
+}
+
+/* Адаптация неоновой сетки для светлой темы */
+body[data-theme="light"] .neon-grid {
+    opacity: 0.1;
+}
+
+/* Адаптация туманностей для светлой темы */
+body[data-theme="light"] .nebula {
+    opacity: 0.1;
+} 
+
+/* Адаптация контактной секции для светлой темы */
+body[data-theme="light"] .contact-info {
+    background: rgba(248, 249, 250, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+}
+
+body[data-theme="light"] .contact-item {
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] .contact-icon {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .contact-text h3 {
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] .contact-text p {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .social-link {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .social-link:hover {
+    background-color: var(--accent-color);
+    color: white;
+} 
+
+/* Адаптация футера для светлой темы */
+body[data-theme="light"] .footer {
+    background-color: var(--bg-secondary);
+}
+
+body[data-theme="light"] .footer-column h3 {
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] .footer-text {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .footer-links a {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .footer-links a:hover {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .footer-social a {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .footer-social a:hover {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .footer-bottom p {
+    color: var(--text-secondary);
+}
+
+/* Добавляем разделительную линию для лучшей читаемости */
+body[data-theme="light"] .footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .form-group label {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: var(--text-primary);
+}
+
+/* Обновленные стили для формы контактов */
+.contact-form {
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: rgba(30, 30, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: var(--font-primary);
+    transition: all 0.3s ease;
+    line-height: 1.2;
+}
+
+textarea {
+    min-height: 120px;
+    padding-top: 1rem;
+    resize: vertical;
+}
+
+/* Исправляем стили для плейсхолдеров */
+input::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    line-height: 1.2;
+    opacity: 1;
+    user-select: none;
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] input,
+body[data-theme="light"] textarea {
+    background: rgba(248, 249, 250, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] input::placeholder,
+body[data-theme="light"] textarea::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+/* Стили для фокуса */
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: rgba(30, 30, 30, 0.6);
+}
+
+body[data-theme="light"] input:focus,
+body[data-theme="light"] textarea:focus {
+    background: white;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 1px var(--accent-color);
+}
+
+/* Стили для заполненных полей */
+input:not(:placeholder-shown),
+textarea:not(:placeholder-shown) {
+    background: rgba(30, 30, 30, 0.6);
+}
+
+body[data-theme="light"] input:not(:placeholder-shown),
+body[data-theme="light"] textarea:not(:placeholder-shown) {
+    background: white;
+}
+
+/* Базовые стили для плейсхолдеров */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* Делаем плейсхолдеры невидимыми в светлой теме */
+body[data-theme="light"] .form-group input::placeholder,
+body[data-theme="light"] .form-group textarea::placeholder {
+    color: transparent;
+}
+
+/* Стили для label в светлой теме */
+body[data-theme="light"] .form-group label {
+    color: rgba(0, 0, 0, 0.5);
+    background: transparent;
+}
+
+body[data-theme="light"] .form-group input:focus ~ label,
+body[data-theme="light"] .form-group textarea:focus ~ label,
+body[data-theme="light"] .form-group input:not(:placeholder-shown) ~ label,
+body[data-theme="light"] .form-group textarea:not(:placeholder-shown) ~ label {
+    color: var(--accent-color);
+}
+
+/* Обновленные стили для плейсхолдеров и лейблов */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: transparent; /* Делаем плейсхолдеры прозрачными для всех тем */
+    transition: all 0.3s ease;
+}
+
+.form-group label {
+    position: absolute;
+    left: 1.2rem;
+    top: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.4); /* Цвет для темной темы */
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+/* Стили для фокуса и заполненных полей в темной теме */
+.form-group input:focus ~ label,
+.form-group textarea:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label {
+    transform: translateY(-2.2rem);
+    font-size: 0.8rem;
+    color: var(--accent-color);
+}
+
+/* Стили для светлой темы */
+body[data-theme="light"] .form-group label {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="light"] .form-group input:focus ~ label,
+body[data-theme="light"] .form-group textarea:focus ~ label,
+body[data-theme="light"] .form-group input:not(:placeholder-shown) ~ label,
+body[data-theme="light"] .form-group textarea:not(:placeholder-shown) ~ label {
+    color: var(--accent-color);
+}
+
+/* Стили для светлой темы */
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] h4,
+body[data-theme="light"] p,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .section-subtitle,
+body[data-theme="light"] .project-title,
+body[data-theme="light"] .project-description,
+body[data-theme="light"] .skill-title,
+body[data-theme="light"] .contact-title,
+body[data-theme="light"] .contact-text {
+    color: var(--text-primary); /* Используем переменную для темного текста */
+}
+
+/* Обновляем переменные для светлой темы */
+body[data-theme="light"] {
+    --text-primary: #2d3436;
+    --text-secondary: #636e72;
+}
+
+/* Стили для информационных полей в светлой теме */
+body[data-theme="light"] .info-label,
+body[data-theme="light"] .info-field,
+body[data-theme="light"] .personal-info span,
+body[data-theme="light"] .personal-info-item,
+body[data-theme="light"] .info-title,
+body[data-theme="light"] .info-value {
+    color: var(--text-primary);
+}
+
+/* Специальные стили для меток (Имя:, Дата рождения:, и т.д.) */
+body[data-theme="light"] .info-label,
+body[data-theme="light"] .personal-info-label {
+    color: var(--accent-color); /* Или можно использовать var(--text-secondary) */
+}
+
+/* Стили для значений полей */
+body[data-theme="light"] .info-value,
+body[data-theme="light"] .personal-info-value {
+    color: var(--text-primary);
+}
+
+/* Стили для секции навыков в светлой теме */
+body[data-theme="light"] .skill-title,
+body[data-theme="light"] .skill-name {
+    color: var(--text-primary);
+    font-weight: 600; /* Делаем чуть жирнее для лучшей читаемости */
+}
+
+body[data-theme="light"] .skill-description {
+    color: var(--text-secondary);
+}
+
+/* Стили для процентов навыков */
+body[data-theme="light"] .skill-percentage {
+    color: var(--text-primary);
+}
+
+/* Делаем карточки навыков более заметными в светлой теме */
+body[data-theme="light"] .skill-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Адаптация текста описания навыков */
+body[data-theme="light"] .skill-card p {
+    color: var(--text-secondary);
+}
+
+.language-toggle {
+    margin-right: 1rem;
+}
+
+#lang-toggle-btn {
+    background: none;
+    border: 1px solid var(--accent-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+}
+
+#lang-toggle-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.lang-text {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Анимация при переключении */
+.lang-transition {
+    animation: langFade 0.3s ease;
+}
+
+@keyframes langFade {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Стили для карточек проектов с 3D-эффектом */
+.projects-grid {
+  perspective: 1000px;
+  margin-top: 3rem;
+}
+
+.project-card {
+  background: rgba(18, 18, 18, 0.5);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  height: 480px; /* Увеличенная высота */
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: rotateY(15deg);
+  box-shadow: -15px 5px 25px rgba(108, 92, 231, 0.3);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] .project-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  box-shadow: var(--shadow-sm);
+}
+
+body[data-theme="light"] .project-card:hover {
+  box-shadow: -15px 5px 25px rgba(108, 92, 231, 0.2);
+}
+
+body[data-theme="light"] .project-content {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 1));
+}
+
+body[data-theme="light"] .project-content h3 {
+  color: var(--text-primary);
+}
+
+body[data-theme="light"] .project-content p {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-tech span {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--accent-color);
+}
+
+body[data-theme="light"] .project-links a {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-links a:hover {
+  color: var(--accent-color);
+}
+
+/* Эффект свечения при наведении для светлой темы */
+body[data-theme="light"] .project-card::before {
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  opacity: 0;
+}
+
+body[data-theme="light"] .project-card:hover::before {
+  opacity: 0.3;
+}
+
+/* Эффект блика для светлой темы */
+body[data-theme="light"] .project-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+}
+
+/* Улучшенный эффект наведения для изображений */
+body[data-theme="light"] .project-image::after {
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+.project-image {
+  height: 220px; /* Фиксированная высота для изображения */
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.1);
+}
+
+.project-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(10, 10, 10, 0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-image::after {
+  opacity: 1;
+}
+
+.project-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.project-content p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Оптимизация размещения тегов и ссылок */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto; /* Прижимаем к низу контентной области */
+  margin-bottom: 1rem;
+}
+
+.project-tech span {
+  padding: 0.4rem 0.8rem; /* Немного уменьшаем размер тегов */
+  font-size: 0.75rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.project-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-normal);
+}
+
+.project-links a:hover {
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.project-links a i {
+  font-size: 1rem;
+}
+
+/* Добавляем эффект свечения при наведении */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  z-index: -1;
+  border-radius: calc(var(--border-radius-md) + 2px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.project-card:hover::before {
+  opacity: 0.5;
+}
+
+/* Добавляем эффект блика при наведении */
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.8s ease;
+}
+
+.project-card:hover::after {
+  left: 150%;
+}
+
+/* Стили для контейнера проектов в горизонтальном ряду */
+.projects-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 2rem 0;
+  /* Скрываем полосу прокрутки для Chrome, Safari и Opera */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE и Edge */
+}
+
+.projects-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari и Opera */
+}
+
+.projects-grid {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  min-width: min-content;
+  perspective: 1000px;
+}
+
+.project-card {
+  flex: 0 0 350px; /* Фиксированная ширина карточки */
+  background: rgba(18, 18, 18, 0.5);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  height: 450px;
+}
+
+/* Остальные стили для project-card остаются без изменений */
+
+/* Стили для кнопок прокрутки проектов */
+.projects-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.project-nav-btn {
+  background: rgba(108, 92, 231, 0.1);
+  border: none;
+  color: var(--accent-color);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.project-nav-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.project-nav-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Стили для карточек навыков */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.skill-card {
+  background: rgba(18, 18, 18, 0.5);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
+}
+
+.skill-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(108, 92, 231, 0.2);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  z-index: -1;
+  border-radius: calc(var(--border-radius-md) + 2px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.skill-card:hover::before {
+  opacity: 0.5;
+}
+
+.skill-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.1);
+  color: var(--accent-color-2);
+}
+
+.skill-icon img {
+  max-height: 80px;
+  max-width: 80px;
+  object-fit: contain;
+}
+
+.skill-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.skill-card:hover .skill-name {
+  color: var(--accent-color);
+}
+
+.skill-name::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--gradient-1);
+  transition: width 0.3s ease;
+}
+
+.skill-card:hover .skill-name::after {
+  width: 100%;
+}
+
+.skill-description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.skill-progress {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.skill-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--gradient-1);
+  border-radius: var(--border-radius-full);
+  transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+  width: 0;
+}
+
+.skill-percentage {
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-percentage {
+  transform: scale(1.1);
+  color: var(--accent-color-2);
+}
+
+/* Анимация для прогресс-бара */
+@keyframes fillProgress {
+  from { width: 0; }
+  to { width: var(--progress); }
+}
+
+.skill-card.animated .skill-progress-bar {
+  animation: fillProgress 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Эффект свечения для карточек навыков */
+.skill-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.8s ease;
+}
+
+.skill-card:hover::after {
+  left: 150%;
+}
+
+/* Стили для светлой темы */
+body[data-theme="light"] .skill-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(108, 92, 231, 0.2);
+}
+
+body[data-theme="light"] .skill-progress {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .skill-name {
+  color: var(--text-primary);
+}
+
+body[data-theme="light"] .skill-description {
+  color: var(--text-secondary);
+}
+
+/* Стили для SVG-иконок */
+.custom-icon {
+  width: 80px;
+  height: 80px;
+  fill: currentColor;
+}
+
+.skill-icon i {
+  font-size: 4rem;
+}
+
+/* Добавим градиентные иконки при наведении */
+.skill-card:hover .skill-icon {
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transform: scale(1.1);
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] .project-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  box-shadow: var(--shadow-sm);
+}
+
+body[data-theme="light"] .project-card:hover {
+  box-shadow: -15px 5px 25px rgba(108, 92, 231, 0.2);
+}
+
+body[data-theme="light"] .project-content {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 1));
+}
+
+body[data-theme="light"] .project-content h3 {
+  color: var(--text-primary);
+}
+body[data-theme="light"] .project-content p {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-tech span {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--accent-color);
+}
+
+body[data-theme="light"] .project-links a {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-links a:hover {
+  color: var(--accent-color);
+}
+
+/* Эффект свечения при наведении для светлой темы */
+body[data-theme="light"] .project-card::before {
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  opacity: 0;
+}
+
+body[data-theme="light"] .project-card:hover::before {
+  opacity: 0.3;
+}
+
+/* Эффект блика для светлой темы */
+body[data-theme="light"] .project-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+}
+
+/* Улучшенный эффект наведения для изображений */
+body[data-theme="light"] .project-image::after {
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+/* Улучшенные стили для технологических тегов в карточках проектов */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.project-tech span {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(108, 92, 231, 0.15);
+  color: var(--accent-color);
+  transition: all var(--transition-normal);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+}
+
+.project-tech span:hover {
+  transform: translateY(-3px);
+  background: var(--accent-color);
+  color: white;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] .project-tech span {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--accent-color);
+  border: 1px solid rgba(108, 92, 231, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="light"] .project-tech span:hover {
+  background: var(--accent-color);
+  color: white;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+}
+
+/* Специальные стили для разных технологий */
+.project-tech span[data-tech="Vue.js"] {
+  background: rgba(65, 184, 131, 0.15);
+  color: #41b883;
+  border-color: rgba(65, 184, 131, 0.2);
+}
+
+.project-tech span[data-tech="Vue.js"]:hover {
+  background: #41b883;
+  color: white;
+  box-shadow: 0 5px 15px rgba(65, 184, 131, 0.3);
+}
+
+.project-tech span[data-tech="Express"] {
+  background: rgba(68, 68, 68, 0.15);
+  color: #444;
+  border-color: rgba(68, 68, 68, 0.2);
+}
+
+.project-tech span[data-tech="Express"]:hover {
+  background: #444;
+  color: white;
+  box-shadow: 0 5px 15px rgba(68, 68, 68, 0.3);
+}
+
+.project-tech span[data-tech="PostgreSQL"] {
+  background: rgba(51, 103, 145, 0.15);
+  color: #336791;
+  border-color: rgba(51, 103, 145, 0.2);
+}
+
+.project-tech span[data-tech="PostgreSQL"]:hover {
+  background: #336791;
+  color: white;
+  box-shadow: 0 5px 15px rgba(51, 103, 145, 0.3);
+}
+
+/* Стили только для игры-таппалки */
+.tapper-game {
+    position: relative;
+    background: rgba(18, 18, 18, 0.8);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    border: 1px solid rgba(108, 92, 231, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(108, 92, 231, 0.1);
+}
+
+/* Стилизация бобра */
+.bobr {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 200px auto;
+}
+
+.bobr::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.bobr:hover::before {
+    opacity: 0.6;
+    transform: scale(1.05);
+}
+
+.bobr img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.3));
+}
+
+.bobr.hit {
+    transform: scale(0.95);
+    animation: hitPulse 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes hitPulse {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Анимация монеток */
+.coin-particle {
+    position: fixed;
+    pointer-events: none;
+    animation: coinFly 1s ease-out forwards;
+    font-size: 1.2rem;
+    z-index: 1000;
+}
+
+@keyframes coinFly {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Счетчик монеток */
+.tapper-score {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-full);
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+}
+
+/* Эффект свечения при клике */
+.click-effect {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    animation: clickEffect 0.5s ease-out forwards;
+    z-index: -1;
+}
+
+@keyframes clickEffect {
+    0% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Стили для критического удара */
+.critical-hit {
+    position: absolute;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: criticalText 1s ease-out forwards;
+    z-index: 1000;
+}
+
+@keyframes criticalText {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, -50px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Стили для комбо */
+.combo-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.combo-counter.active {
+    opacity: 1;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.shop-section {
+    width: 300px;
+    background: rgba(18, 18, 18, 0.95);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    border: 1px solid rgba(108, 92, 231, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.shop-title {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-color-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border-bottom: 2px solid rgba(108, 92, 231, 0.3);
+}
+
+.shop-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius-sm);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(108, 92, 231, 0.1);
+    transition: all 0.3s ease;
+}
+
+.shop-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(108, 92, 231, 0.2);
+    transform: translateY(-2px);
+}
+
+.shop-item-name {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.shop-item-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.shop-item-level {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.shop-item-stats {
+    color: #00cec9;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.shop-buy-btn {
+    width: 100%;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.shop-buy-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.shop-buy-btn:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Анимация для кнопок */
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.shop-buy-btn:not(:disabled) {
+    animation: buttonPulse 2s infinite;
+}
+
+/* Общие утилиты */
+.hidden {
+    display: none;
+}
+
+/* Анимации для монет */
+@keyframes coinPop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2) translateY(-20px);
+        opacity: 0;
+    }
+}
+
+.coin-popup {
+    position: absolute;
+    color: #ffd700;
+    pointer-events: none;
+    animation: coinPop 0.5s ease-out forwards;
+}
+
+/* Стили для Pacman */
+.pacman-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius-lg);
+}
+
+#pacmanCanvas {
+    border: 2px solid var(--accent-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.control-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-md);
+    background: var(--gradient-1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+/* Стили для кнопки возврата */
+.back-to-games {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.back-to-games .control-btn {
+    background: var(--gradient-2);
+}
+/* Обновленные стили для контейнеров игр */
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.game-container.hidden {
+    display: none;
+}
+
+.game-container:not(.hidden) {
+    opacity: 1;
+    pointer-events: all;
+} 
+
+/* Адаптация космического фона для светлой темы */
+body[data-theme="light"] .space-background {
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa, #ffffff);
+}
+
+/* Адаптация звезд для светлой темы */
+body[data-theme="light"] .stars {
+    background: 
+        radial-gradient(1px 1px at 25% 25%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(1px 1px at 50% 50%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(1px 1px at 75% 75%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(2px 2px at 15% 85%, var(--accent-color) 1px, transparent 0),
+        radial-gradient(2px 2px at 85% 15%, var(--accent-color) 1px, transparent 0);
+    opacity: 0.3;
+}
+
+/* Адаптация неоновой сетки для светлой темы */
+body[data-theme="light"] .neon-grid {
+    opacity: 0.1;
+}
+
+/* Адаптация туманностей для светлой темы */
+body[data-theme="light"] .nebula {
+    opacity: 0.1;
+} 
+
+/* Адаптация контактной секции для светлой темы */
+body[data-theme="light"] .contact-info {
+    background: rgba(248, 249, 250, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+}
+
+body[data-theme="light"] .contact-item {
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] .contact-icon {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .contact-text h3 {
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] .contact-text p {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .social-link {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .social-link:hover {
+    background-color: var(--accent-color);
+    color: white;
+} 
+
+/* Адаптация футера для светлой темы */
+body[data-theme="light"] .footer {
+    background-color: var(--bg-secondary);
+}
+
+body[data-theme="light"] .footer-column h3 {
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] .footer-text {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .footer-links a {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .footer-links a:hover {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .footer-social a {
+    color: var(--text-secondary);
+}
+
+body[data-theme="light"] .footer-social a:hover {
+    color: var(--accent-color);
+}
+
+body[data-theme="light"] .footer-bottom p {
+    color: var(--text-secondary);
+}
+
+/* Добавляем разделительную линию для лучшей читаемости */
+body[data-theme="light"] .footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .form-group label {
+    background-color: rgba(108, 92, 231, 0.1);
+    color: var(--text-primary);
+}
+
+/* Обновленные стили для формы контактов */
+.contact-form {
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: rgba(30, 30, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: var(--font-primary);
+    transition: all 0.3s ease;
+    line-height: 1.2;
+}
+
+textarea {
+    min-height: 120px;
+    padding-top: 1rem;
+    resize: vertical;
+}
+
+/* Исправляем стили для плейсхолдеров */
+input::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    line-height: 1.2;
+    opacity: 1;
+    user-select: none;
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] input,
+body[data-theme="light"] textarea {
+    background: rgba(248, 249, 250, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: var(--text-primary);
+}
+
+body[data-theme="light"] input::placeholder,
+body[data-theme="light"] textarea::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+/* Стили для фокуса */
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: rgba(30, 30, 30, 0.6);
+}
+
+body[data-theme="light"] input:focus,
+body[data-theme="light"] textarea:focus {
+    background: white;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 1px var(--accent-color);
+}
+
+/* Стили для заполненных полей */
+input:not(:placeholder-shown),
+textarea:not(:placeholder-shown) {
+    background: rgba(30, 30, 30, 0.6);
+}
+
+body[data-theme="light"] input:not(:placeholder-shown),
+body[data-theme="light"] textarea:not(:placeholder-shown) {
+    background: white;
+}
+
+/* Базовые стили для плейсхолдеров */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* Делаем плейсхолдеры невидимыми в светлой теме */
+body[data-theme="light"] .form-group input::placeholder,
+body[data-theme="light"] .form-group textarea::placeholder {
+    color: transparent;
+}
+
+/* Стили для label в светлой теме */
+body[data-theme="light"] .form-group label {
+    color: rgba(0, 0, 0, 0.5);
+    background: transparent;
+}
+
+body[data-theme="light"] .form-group input:focus ~ label,
+body[data-theme="light"] .form-group textarea:focus ~ label,
+body[data-theme="light"] .form-group input:not(:placeholder-shown) ~ label,
+body[data-theme="light"] .form-group textarea:not(:placeholder-shown) ~ label {
+    color: var(--accent-color);
+}
+
+/* Обновленные стили для плейсхолдеров и лейблов */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: transparent; /* Делаем плейсхолдеры прозрачными для всех тем */
+    transition: all 0.3s ease;
+}
+
+.form-group label {
+    position: absolute;
+    left: 1.2rem;
+    top: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.4); /* Цвет для темной темы */
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+/* Стили для фокуса и заполненных полей в темной теме */
+.form-group input:focus ~ label,
+.form-group textarea:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label {
+    transform: translateY(-2.2rem);
+    font-size: 0.8rem;
+    color: var(--accent-color);
+}
+
+/* Стили для светлой темы */
+body[data-theme="light"] .form-group label {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="light"] .form-group input:focus ~ label,
+body[data-theme="light"] .form-group textarea:focus ~ label,
+body[data-theme="light"] .form-group input:not(:placeholder-shown) ~ label,
+body[data-theme="light"] .form-group textarea:not(:placeholder-shown) ~ label {
+    color: var(--accent-color);
+}
+
+/* Стили для светлой темы */
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] h4,
+body[data-theme="light"] p,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .section-subtitle,
+body[data-theme="light"] .project-title,
+body[data-theme="light"] .project-description,
+body[data-theme="light"] .skill-title,
+body[data-theme="light"] .contact-title,
+body[data-theme="light"] .contact-text {
+    color: var(--text-primary); /* Используем переменную для темного текста */
+}
+
+/* Обновляем переменные для светлой темы */
+body[data-theme="light"] {
+    --text-primary: #2d3436;
+    --text-secondary: #636e72;
+}
+
+/* Стили для информационных полей в светлой теме */
+body[data-theme="light"] .info-label,
+body[data-theme="light"] .info-field,
+body[data-theme="light"] .personal-info span,
+body[data-theme="light"] .personal-info-item,
+body[data-theme="light"] .info-title,
+body[data-theme="light"] .info-value {
+    color: var(--text-primary);
+}
+
+/* Специальные стили для меток (Имя:, Дата рождения:, и т.д.) */
+body[data-theme="light"] .info-label,
+body[data-theme="light"] .personal-info-label {
+    color: var(--accent-color); /* Или можно использовать var(--text-secondary) */
+}
+
+/* Стили для значений полей */
+body[data-theme="light"] .info-value,
+body[data-theme="light"] .personal-info-value {
+    color: var(--text-primary);
+}
+
+/* Стили для секции навыков в светлой теме */
+body[data-theme="light"] .skill-title,
+body[data-theme="light"] .skill-name {
+    color: var(--text-primary);
+    font-weight: 600; /* Делаем чуть жирнее для лучшей читаемости */
+}
+
+body[data-theme="light"] .skill-description {
+    color: var(--text-secondary);
+}
+
+/* Стили для процентов навыков */
+body[data-theme="light"] .skill-percentage {
+    color: var(--text-primary);
+}
+
+/* Делаем карточки навыков более заметными в светлой теме */
+body[data-theme="light"] .skill-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Адаптация текста описания навыков */
+body[data-theme="light"] .skill-card p {
+    color: var(--text-secondary);
+}
+
+.language-toggle {
+    margin-right: 1rem;
+}
+
+#lang-toggle-btn {
+    background: none;
+    border: 1px solid var(--accent-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+}
+
+#lang-toggle-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.lang-text {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Анимация при переключении */
+.lang-transition {
+    animation: langFade 0.3s ease;
+}
+
+@keyframes langFade {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Стили для карточек проектов с 3D-эффектом */
+.projects-grid {
+  perspective: 1000px;
+  margin-top: 3rem;
+}
+
+.project-card {
+  background: rgba(18, 18, 18, 0.5);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  height: 480px; /* Увеличенная высота */
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: rotateY(15deg);
+  box-shadow: -15px 5px 25px rgba(108, 92, 231, 0.3);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] .project-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  box-shadow: var(--shadow-sm);
+}
+
+body[data-theme="light"] .project-card:hover {
+  box-shadow: -15px 5px 25px rgba(108, 92, 231, 0.2);
+}
+
+body[data-theme="light"] .project-content {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 1));
+}
+
+body[data-theme="light"] .project-content h3 {
+  color: var(--text-primary);
+}
+
+body[data-theme="light"] .project-content p {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-tech span {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--accent-color);
+}
+
+body[data-theme="light"] .project-links a {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-links a:hover {
+  color: var(--accent-color);
+}
+
+/* Эффект свечения при наведении для светлой темы */
+body[data-theme="light"] .project-card::before {
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  opacity: 0;
+}
+
+body[data-theme="light"] .project-card:hover::before {
+  opacity: 0.3;
+}
+
+/* Эффект блика для светлой темы */
+body[data-theme="light"] .project-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+}
+
+/* Улучшенный эффект наведения для изображений */
+body[data-theme="light"] .project-image::after {
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+.project-image {
+  height: 220px; /* Фиксированная высота для изображения */
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.1);
+}
+
+.project-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(10, 10, 10, 0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-image::after {
+  opacity: 1;
+}
+
+.project-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.project-content p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Оптимизация размещения тегов и ссылок */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto; /* Прижимаем к низу контентной области */
+  margin-bottom: 1rem;
+}
+
+.project-tech span {
+  padding: 0.4rem 0.8rem; /* Немного уменьшаем размер тегов */
+  font-size: 0.75rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.project-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-normal);
+}
+
+.project-links a:hover {
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.project-links a i {
+  font-size: 1rem;
+}
+
+/* Добавляем эффект свечения при наведении */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  z-index: -1;
+  border-radius: calc(var(--border-radius-md) + 2px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.project-card:hover::before {
+  opacity: 0.5;
+}
+
+/* Добавляем эффект блика при наведении */
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.8s ease;
+}
+
+.project-card:hover::after {
+  left: 150%;
+}
+
+/* Стили для контейнера проектов в горизонтальном ряду */
+.projects-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 2rem 0;
+  /* Скрываем полосу прокрутки для Chrome, Safari и Opera */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE и Edge */
+}
+
+.projects-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari и Opera */
+}
+
+.projects-grid {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  min-width: min-content;
+  perspective: 1000px;
+}
+
+.project-card {
+  flex: 0 0 350px; /* Фиксированная ширина карточки */
+  background: rgba(18, 18, 18, 0.5);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  height: 450px;
+}
+
+/* Остальные стили для project-card остаются без изменений */
+
+/* Стили для кнопок прокрутки проектов */
+.projects-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.project-nav-btn {
+  background: rgba(108, 92, 231, 0.1);
+  border: none;
+  color: var(--accent-color);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.project-nav-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.project-nav-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Стили для карточек навыков */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.skill-card {
+  background: rgba(18, 18, 18, 0.5);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
+}
+
+.skill-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(108, 92, 231, 0.2);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  z-index: -1;
+  border-radius: calc(var(--border-radius-md) + 2px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.skill-card:hover::before {
+  opacity: 0.5;
+}
+
+.skill-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-color);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.1);
+  color: var(--accent-color-2);
+}
+
+.skill-icon img {
+  max-height: 80px;
+  max-width: 80px;
+  object-fit: contain;
+}
+
+.skill-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.skill-card:hover .skill-name {
+  color: var(--accent-color);
+}
+
+.skill-name::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--gradient-1);
+  transition: width 0.3s ease;
+}
+
+.skill-card:hover .skill-name::after {
+  width: 100%;
+}
+
+.skill-description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.skill-progress {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.skill-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--gradient-1);
+  border-radius: var(--border-radius-full);
+  transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+  width: 0;
+}
+
+.skill-percentage {
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-percentage {
+  transform: scale(1.1);
+  color: var(--accent-color-2);
+}
+
+/* Анимация для прогресс-бара */
+@keyframes fillProgress {
+  from { width: 0; }
+  to { width: var(--progress); }
+}
+
+.skill-card.animated .skill-progress-bar {
+  animation: fillProgress 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Эффект свечения для карточек навыков */
+.skill-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.8s ease;
+}
+
+.skill-card:hover::after {
+  left: 150%;
+}
+
+/* Стили для светлой темы */
+body[data-theme="light"] .skill-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(108, 92, 231, 0.2);
+}
+
+body[data-theme="light"] .skill-progress {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="light"] .skill-name {
+  color: var(--text-primary);
+}
+
+body[data-theme="light"] .skill-description {
+  color: var(--text-secondary);
+}
+
+/* Стили для SVG-иконок */
+.custom-icon {
+  width: 80px;
+  height: 80px;
+  fill: currentColor;
+}
+
+.skill-icon i {
+  font-size: 4rem;
+}
+
+/* Добавим градиентные иконки при наведении */
+.skill-card:hover .skill-icon {
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transform: scale(1.1);
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] .project-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  box-shadow: var(--shadow-sm);
+}
+
+body[data-theme="light"] .project-card:hover {
+  box-shadow: -15px 5px 25px rgba(108, 92, 231, 0.2);
+}
+
+body[data-theme="light"] .project-content {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 1));
+}
+
+body[data-theme="light"] .project-content h3 {
+  color: var(--text-primary);
+}
+body[data-theme="light"] .project-content p {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-tech span {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--accent-color);
+}
+
+body[data-theme="light"] .project-links a {
+  color: var(--text-secondary);
+}
+
+body[data-theme="light"] .project-links a:hover {
+  color: var(--accent-color);
+}
+
+/* Эффект свечения при наведении для светлой темы */
+body[data-theme="light"] .project-card::before {
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  opacity: 0;
+}
+
+body[data-theme="light"] .project-card:hover::before {
+  opacity: 0.3;
+}
+
+/* Эффект блика для светлой темы */
+body[data-theme="light"] .project-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+}
+
+/* Улучшенный эффект наведения для изображений */
+body[data-theme="light"] .project-image::after {
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+/* Улучшенные стили для технологических тегов в карточках проектов */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.project-tech span {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(108, 92, 231, 0.15);
+  color: var(--accent-color);
+  transition: all var(--transition-normal);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+}
+
+.project-tech span:hover {
+  transform: translateY(-3px);
+  background: var(--accent-color);
+  color: white;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+/* Адаптация для светлой темы */
+body[data-theme="light"] .project-tech span {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--accent-color);
+  border: 1px solid rgba(108, 92, 231, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="light"] .project-tech span:hover {
+  background: var(--accent-color);
+  color: white;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+}
+
+/* Специальные стили для разных технологий */
+.project-tech span[data-tech="Vue.js"] {
+  background: rgba(65, 184, 131, 0.15);
+  color: #41b883;
+  border-color: rgba(65, 184, 131, 0.2);
+}
+
+.project-tech span[data-tech="Vue.js"]:hover {
+  background: #41b883;
+  color: white;
+  box-shadow: 0 5px 15px rgba(65, 184, 131, 0.3);
+}
+
+.project-tech span[data-tech="Express"] {
+  background: rgba(68, 68, 68, 0.15);
+  color: #444;
+  border-color: rgba(68, 68, 68, 0.2);
+}
+
+.project-tech span[data-tech="Express"]:hover {
+  background: #444;
+  color: white;
+  box-shadow: 0 5px 15px rgba(68, 68, 68, 0.3);
+}
+
+.project-tech span[data-tech="PostgreSQL"] {
+  background: rgba(51, 103, 145, 0.15);
+  color: #336791;
+  border-color: rgba(51, 103, 145, 0.2);
+}
+
+.project-tech span[data-tech="PostgreSQL"]:hover {
+  background: #336791;
+  color: white;
+  box-shadow: 0 5px 15px rgba(51, 103, 145, 0.3);
+}
+
+/* Стили только для игры-таппалки */
+.tapper-game {
+    position: relative;
+    background: rgba(18, 18, 18, 0.8);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    border: 1px solid rgba(108, 92, 231, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(108, 92, 231, 0.1);
+}
+
+/* Стилизация бобра */
+.bobr {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 200px auto;
+}
+
+.bobr::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.bobr:hover::before {
+    opacity: 0.6;
+    transform: scale(1.05);
+}
+
+.bobr img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(108, 92, 231, 0.3));
+}
+
+.bobr.hit {
+    transform: scale(0.95);
+    animation: hitPulse 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes hitPulse {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Анимация монеток */
+.coin-particle {
+    position: fixed;
+    pointer-events: none;
+    animation: coinFly 1s ease-out forwards;
+    font-size: 1.2rem;
+    z-index: 1000;
+}
+
+@keyframes coinFly {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Счетчик монеток */
+.tapper-score {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-full);
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+}
+
+/* Эффект свечения при клике */
+.click-effect {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    animation: clickEffect 0.5s ease-out forwards;
+    z-index: -1;
+}
+
+@keyframes clickEffect {
+    0% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Стили для критического удара */
+.critical-hit {
+    position: absolute;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: criticalText 1s ease-out forwards;
+    z-index: 1000;
+}
+
+@keyframes criticalText {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, -50px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Стили для комбо */
+.combo-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.combo-counter.active {
+    opacity: 1;
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.shop-section {
+    width: 300px;
+    background: rgba(18, 18, 18, 0.95);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    border: 1px solid rgba(108, 92, 231, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.shop-title {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-color-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border-bottom: 2px solid rgba(108, 92, 231, 0.3);
+}
+
+.shop-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--border-radius-sm);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(108, 92, 231, 0.1);
+    transition: all 0.3s ease;
+}
+
+.shop-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(108, 92, 231, 0.2);
+    transform: translateY(-2px);
+}
+
+.shop-item-name {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.shop-item-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.shop-item-level {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.shop-item-stats {
+    color: #00cec9;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.shop-buy-btn {
+    width: 100%;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.shop-buy-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.shop-buy-btn:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+    color: rgba(255, 255, 255, 0.5);
+}
+
 /* Центральная секция с бобром */
 .tapper-game {
     width: 500px;
     height: 500px;
     background: rgba(18, 18, 18, 0.95);
-    border-radius: 50%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
     border: 1px solid rgba(108, 92, 231, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
+  overflow: hidden;
 }
 
 /* Счетчик монет */
 .tapper-score {
-    position: absolute;
+  position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
+  background: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
     color: white;
     padding: 0.6rem 1.2rem;
-    border-radius: var(--border-radius-full);
+  border-radius: var(--border-radius-full);
     font-weight: bold;
     font-size: 1.2rem;
     box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
@@ -5481,5 +8119,24 @@ body[data-theme="light"] .project-tech span:hover {
 body[data-theme="light"] .ai-response {
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(108, 92, 231, 0.2);
+}
+
+/* Удаляем стили кастомного курсора */
+.cursor, .cursor-follower {
+    display: none;
+}
+
+/* Возвращаем стандартный курсор */
+body {
+    cursor: default;
+}
+
+/* Для интерактивных элементов */
+a, button, .btn {
+    cursor: pointer;
+}
+
+input, textarea {
+    cursor: text;
 }
 
